@@ -1,23 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { Container } from "@mui/material";
+import Table from "./component/tablle/Table";
+import { useEffect, useState } from "react";
+import { getUsersAction } from "./component/common/getUsersAction";
+import axios from "axios";
+import Form from "./component/form/Form";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  useEffect(() => {
+    axios
+      .get("https://64340de21c5ed06c958dd2da.mockapi.io/users")
+      .then(({ data }) => setUsers(data));
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Container maxWidth="xl">
+        <Form />
+
+        <Table />
+      </Container>
     </div>
   );
 }
