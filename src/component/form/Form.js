@@ -3,7 +3,7 @@ import * as React from "react";
 import axios from "axios";
 import BasicModal from "./FormModal";
 
-export default function FormControlBar() {
+export default function FormControlBar(getUsers) {
   const [data, setData] = React.useState({ name: "", avatar: "" });
 
   function onChangeName(props) {
@@ -33,7 +33,7 @@ export default function FormControlBar() {
         Искать
       </Button>
 
-      <BasicModal />
+      <BasicModal getUsers = {getUsers}/>
     </div>
   );
 }

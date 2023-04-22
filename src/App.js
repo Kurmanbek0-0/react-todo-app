@@ -8,18 +8,25 @@ import Form from "./component/form/Form";
 
 function App() {
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
-    axios
-      .get("https://64340de21c5ed06c958dd2da.mockapi.io/users")
-      .then(({ data }) => setUsers(data));
+    getUsersAction();
   }, []);
+
+  function getUsersAction() {
+    axios
+    .get("https://64340de21c5ed06c958dd2da.mockapi.io/users")
+    .then(({data}) => {
+      setUsers(data)
+    });
+  }
 
   return (
     <div className="App">
       <Container maxWidth="xl">
-        <Form />
+        <Form getUsers={getUsersAction}/>
 
-        <Table />
+        <Table users={users} getUsers={getUsersAction}/>
       </Container>
     </div>
   );
